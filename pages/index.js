@@ -1,28 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
+import { useStateContext } from '../components/HBOProvider';
+import { useEffect } from 'react';
+import Login from '../components/UI/Login/Login';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const globalState = useStateContext();
+  const router = useRouter();
+  useEffect(() => {
+    const loggedIn = false;
+    if(loggedIn === false) {
+      router.push('/create')
+    }
+  }, [])
   return (
     <div>
-      <div className="login-user">
-        <div className="login-user__top">
-          <div className="login-user__logo" />
-          <span className="login-user__title">
-            Who Is Watching?
-          </span>
-        </div>
-        <div className="login-user__form">
-          <div className="login-user__user-box">
-            <img className="login-user__user-img" src="https://images.unsplash.com/photo-1510227272981-87123e259b17?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=3759e09a5b9fbe53088b23c615b6312e" />
-            <div className="login-user__user-name">Jane</div>
-          </div>
-        </div>
-        <div className="login-user__buttons">
-          <button className="login-user__adult">Add Adult</button>
-          <button className="login-user__kid">Add kid</button>
-
-        </div>
-      </div>
+      <Login />
     </div>
   )
 }
