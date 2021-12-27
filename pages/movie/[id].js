@@ -60,7 +60,7 @@ export default function SingleMediaPage(props) {
 
   const imageUrl = () => {
     if (hasVideo == false) {
-      return `https://image.tmdb.org/t/p/w1280${mediaData.poster_path}`
+      return `https://image.tmdb.org/t/p/w1280${mediaData.backdrop_path}`
     } else {
       return
     }
