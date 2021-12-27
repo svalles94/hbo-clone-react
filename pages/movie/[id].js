@@ -34,7 +34,7 @@ export default function SingleMediaPage(props) {
         // handle error
         console.log("Errror Response: ");
         console.log(error);
-        // router.push('/');
+        router.push('/');
       })
       .then(function () {
 
