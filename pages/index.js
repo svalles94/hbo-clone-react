@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {}, []);
   return AuthCheck(
     <MainLayout>
-      <FeaturedMedia />
+      <FeaturedMedia type="front" mediaUrl="https://www.youtube.com/embed/-FmWuCgJmxo?mute=1&autoplay=1" title="Venom 2: let there be carnage" location='In theaters and on HBO MAX. Streaming throughout May 23.' linkUrl='/movies/id'/>
       <LazyLoad offset={-400} placeholder={<PlaceHolders title="Popular Movies" type="large-v"/>}>
       <MediaRow
         title="Popular Movies" 
