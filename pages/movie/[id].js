@@ -7,6 +7,9 @@ import AuthCheck from "../../components/AuthCheck";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import LazyLoad from "react-lazyload";
+import PlaceHolders from "../../components/UI/Placeholder/PlaceHolders";
+
 
 export default function SingleMediaPage(props) {
   const router = useRouter();
@@ -28,56 +31,70 @@ export default function SingleMediaPage(props) {
           setHasVideo(true);
           setVideoKey(response.data.videos.results);
         }
-
       })
       .catch(function (error) {
         // handle error
         console.log("Errror Response: ");
         console.log(error);
-        router.push('/');
+        router.push("/");
       })
       .then(function () {
-
         // always executed
       });
-  }, []);
+  }, [mediaData]);
 
   const mediaUrl = () => {
     if (hasVideo === true) {
-    const videoResults = Object.values(videoKey).filter(video => video.type == "Trailer").slice(0, 1);
-    const chosenVideoKey = videoResults.map(a => a.key)[0];
-    const website = videoResults.map(a => a.site)[0];
-    console.log("///////////////////");
-    console.log(videoResults.map(a => a.site)[0]);
-    console.log(chosenVideoKey);
-    if (website == "YouTube"){
-      return `https://www.youtube.com/embed/${chosenVideoKey}?mute=1&autoplay=1&loop=1&playlist=${chosenVideoKey}`;
-    } else {
-      return `https://player.vimeo.com/video/${chosenVideoKey}?autoplay=1&loop=1&muted=1&background=1`
+      const videoResults = Object.values(videoKey)
+        .filter((video) => video.type == "Trailer")
+        .slice(0, 1);
+      const chosenVideoKey = videoResults.map((a) => a.key)[0];
+      const website = videoResults.map((a) => a.site)[0];
+      console.log("///////////////////");
+      if (website == "YouTube") {
+        return `https://www.youtube.com/embed/${chosenVideoKey}?mute=1&autoplay=1&loop=1&playlist=${chosenVideoKey}`;
+      } else {
+        return `https://player.vimeo.com/video/${chosenVideoKey}?autoplay=1&loop=1&muted=1&background=1`;
+      }
     }
-    }
-  }
+  };
 
   const imageUrl = () => {
     if (hasVideo == false) {
-      return `https://image.tmdb.org/t/p/w1280${mediaData.backdrop_path}`
+      const posterPath = mediaData.poster_path;
+      const backDropPath = mediaData.backdrop_path;
+      if (backDropPath == null) {
+        return `https://image.tmdb.org/t/p/w1280${posterPath}`;
+      } else {
+        return `https://image.tmdb.org/t/p/w1280${backDropPath}`;
+      }
     } else {
-      return
+      return;
     }
-  }
+  };
 
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
-        type={hasVideo ? 'front' : '' }
-        imageUrl={hasVideo === false ? imageUrl() : ''}
-        mediaUrl={hasVideo ? mediaUrl() : ''}
+        showExtra="no"
+        type={hasVideo ? "front" : ""}
+        imageUrl={hasVideo === false ? imageUrl() : ""}
+        mediaUrl={hasVideo ? mediaUrl() : ""}
         title={mediaData.title}
         location="In theaters and on HBO MAX. Streaming throughout May 23."
         linkUrl="/movies/id"
       />
-      {/* <MediaRow title="More Like This" type="small-v"/> */}
-      <CastInfo />
+      <LazyLoad
+        offset={-400}
+        placeholder={<PlaceHolders title="Popular Movies" type="large-v" />}
+      >
+        <MediaRow
+          title="Similar To This"
+          type="small-v"
+          endpoint={`movie/${props.query.id}/similar?`}
+        />
+      </LazyLoad>
+      <CastInfo mediaId={props.query.id} />
     </MainLayout>
   );
 }

@@ -1,7 +1,9 @@
 import { imageConfigDefault } from "next/dist/server/image-config";
-
+import { useRouter } from 'next/router';
 const FeaturedMedia = (props) => {
+    const router = useRouter();
     const clickedPlay = () => {
+        router.push(props.linkUrl);
         console.log('send user to media page' + props.mediaUrl );
     }
     const showMedia = () => {
@@ -30,10 +32,10 @@ const FeaturedMedia = (props) => {
                 <div className="featured-media__title" onClick={clickedPlay}>
                     {props.title}
                 </div>
-                <div className="featured-media__playing">
+                <div className={`featured-media__playing ${props.showExtra === 'no' ? 'hide-comp' : ''}`}>
                     NOW PLAYING
                 </div>
-                <div className="featured-media__location">
+                <div className={`featured-media__location ${props.showExtra === 'no' ? 'hide-comp' : ''}`}>
                     {props.location}
                 </div>
                <div className="featured-media__buttons">
@@ -41,7 +43,7 @@ const FeaturedMedia = (props) => {
                     <i className="fas fa-play" />
                     
                 </div>
-                <div className="featured-media__info-btn" onClick={clickedPlay}>
+                <div className={`featured-media__info-btn ${props.showExtra === 'no' ? 'hide-comp' : ''}`} onClick={clickedPlay}>
                         More Info
                     </div>
                </div>
