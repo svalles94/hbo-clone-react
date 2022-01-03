@@ -17,6 +17,7 @@ export default function Home() {
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
+        mediaType="movie"
         type="front"
         mediaUrl="https://www.youtube.com/embed/-FmWuCgJmxo?mute=1&autoplay=1"
         title="Venom 2: let there be carnage"
@@ -28,6 +29,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Popular Movies" type="large-v" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Popular Movies"
           type="large-v"
           endpoint="discover/movie?sort_by=popularity.desc"
@@ -39,6 +41,7 @@ export default function Home() {
       >
         <MediaRow
           title="Series"
+          mediaType="series"
           type="small-v"
           endpoint="discover/tv?sort_by=popularity.desc"
         />
@@ -48,6 +51,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Action" type="small-v" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Action"
           type="small-v"
           endpoint="discover/movie?with_genres=28"
@@ -58,6 +62,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Horror" type="small-v" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Horror"
           type="small-v"
           endpoint="discover/movie?with_genres=27"
@@ -68,6 +73,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Sci-Fi" type="small-v" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Sci-Fi"
           type="small-v"
           endpoint="discover/movie?with_genres=878"
@@ -78,6 +84,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Animations" type="small-h" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Animations"
           type="small-h"
           endpoint="discover/movie?with_genres=16"
@@ -88,6 +95,7 @@ export default function Home() {
         placeholder={<PlaceHolders title="Comedy" type="small-v" />}
       >
         <MediaRow
+          mediaType="movie"
           title="Comedy"
           type="small-v"
           endpoint="discover/movie?with_genres=35"

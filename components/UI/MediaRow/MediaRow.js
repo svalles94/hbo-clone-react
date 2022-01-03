@@ -17,8 +17,8 @@ const MediaRow = (props) => {
         setMovieData(shuffleArray(response.data.results));
         setLoadingData(false);
         // handle success
-        console.log("Success Response for " + props.title);
-        console.log(response);
+        // console.log("Success Response for " + props.title);
+        // console.log(response);
       })
       .catch(function (error) {
         // handle error
@@ -42,7 +42,7 @@ const MediaRow = (props) => {
     return loadingData
       ? loopComp(<Skeleton />, 10)
       : movies.map((movie) => {
-          return <Thumbnail movieData={movie} type={type} />;
+          return <Thumbnail movieData={movie} type={type} mediaType={props.mediaType} />;
         });
   };
 
@@ -70,7 +70,7 @@ const Thumbnail = (props) => {
     }
   };
   return (
-    <Link href={`/movie/${props.movieData.id}`}>
+    <Link href={`/${props.mediaType === 'movie' ? 'movie' : 'tv'}/${props.movieData.id}`}>
       <a>
         <div className="media-row__thumbnail">
           <img

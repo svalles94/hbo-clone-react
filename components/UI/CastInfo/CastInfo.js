@@ -8,7 +8,7 @@ const CastInfo = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${props.mediaId}/credits?api_key=f7e5193a85a5af98ed826e30d2e8a2c5&language=en-US`
+				`https://api.themoviedb.org/3/${props.mediaType === 'movie' ? 'movie' : 'tv'}/${props.mediaId}/credits?api_key=1db7688f317e15dd2ee2933dae838634&language=en-US`,
       )
       .then(function (response) {
         // console.log(response.data.results);
@@ -16,8 +16,7 @@ const CastInfo = (props) => {
         setLoadingData(false);
         // handle success
         console.log("Success Response for cast and crew.");
-        console.log(response);
-        console.log(response.data);
+        
       })
       .catch(function (error) {
         // handle error
