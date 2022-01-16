@@ -74,8 +74,8 @@ export default function SingleMediaPage(props) {
       <FeaturedMedia
         showExtra="no"
         type={props.hasVideo ? "front" : ""}
-        imageUrl={props.query.mediaType === "movie" ? imageUrl() : imageUrl()}
-        mediaUrl={props.query.mediaType === "movie" ? mediaUrl() : mediaUrl()}
+        imageUrl={imageUrl()}
+        mediaUrl={mediaUrl()}
         title={
           props.query.mediaType === "movie"
             ? props.mediaData.title
@@ -112,6 +112,13 @@ export async function getServerSideProps(context) {
     console.log(error);
   }
   return {
-    props: { mediaData: mediaData.data, query: context.query, hasVideo: mediaData.data.videos.results.length <= 0 ? false : true },
+    props: {
+      mediaData: mediaData.data,
+      query: context.query,
+      hasVideo:
+        Object.values(mediaData.data.videos.results).filter((video) => video.type == 'Trailer').slice(0,1).length > 0 
+          ? true
+          : false,
+    },
   };
 }

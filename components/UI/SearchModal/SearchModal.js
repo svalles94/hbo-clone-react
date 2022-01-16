@@ -13,7 +13,7 @@ const SearchModal = (props) => {
     return(
      <div className={`search-modal ${globalState.searchOpen ? 'search-modal--active' : ''}`} >
          <div className="search-modal__input-group">
-         <input className="search-modal__input" type="text" placeholder="search for a title" value="" />
+         <input className="search-modal__input" type="text" placeholder="search for a title" />
          <div className="search-modal__close-btn" onClick={() => globalState.setSearchOpenAction(!globalState.searchOpen)}>
          <i className="fas fa-times" />
          </div>
@@ -25,15 +25,12 @@ const SearchModal = (props) => {
         
          <div className="search-modal__thumbnails">
           
-            {loopComp(
-            (<div className="search-modal__thumbnail">
+         <div className="search-modal__thumbnail">
              <img src="https://pbs.twimg.com/media/FBRmk0WXIAIU9U2.jpg" alt="" />
              <div className="search-modal__top-layer">
                  <i className="fas fa-play" />
              </div>
-             </div>), 10
-             
-             )}
+             </div>
          </div>
    
      </div>
