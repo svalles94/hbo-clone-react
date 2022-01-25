@@ -1,26 +1,54 @@
 import { useStateContext } from "../../HBOProvider";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import ls from "local-storage";
 
 const Account = (props) => {
     const globalState = useStateContext();
+    const router = useRouter();
+    useEffect(() => {
+        if(globalState.accountModalOpen) {
+          document.body.style.overflowY = 'hidden';
+        } else {
+          document.body.style.overflowY = 'auto';
+    
+        }
+      }, [globalState.accountModalOpen]);
+
+      const watchMedia = (url) => {
+        router.push(url);
+        globalState.setAccountModalOpenAction(!globalState.accountModalOpen);
+      }
+      const showWatchList = () => {
+        return globalState.watchList.map((item, index) => {
+          return(
+            <div className="account__watch-video" key={index}>
+              <img src={item.imageUrl} />
+              <div className="account__watch-overlay">
+                <div className="account__watch-buttons">
+                  <div className="account__watch-circle" onClick={() => watchMedia(`/${item.mediaType}/${item.mediaId}`)}>
+                    <i className="fas fa-play" />
+                  </div>
+                  <div className="account__watch-circle" onClick={() => globalState.removeFromList(item.mediaId)}>
+                    <i className="fas fa-times" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })
+        
+      }
+      const signOut = () => {
+        ls.remove('activeUID');
+        router.push("/");
+      }
     return (
       <div className={`account ${globalState.accountModalOpen ? 'account--active' : ''}`}>
           <div className="account__details">
           <div className="account__title">My List</div>
           <div className="account__watch-list">
-          <div className="account__watch-video">
-              <img src="https://i5.walmartimages.com/asr/a977fb15-02bf-450b-bfc5-682cb4932548.86c3fbf41473395413624ba16670c537.jpeg" alt="" />
-              <div className="account__watch-overlay">
-              <div className="account__watch-buttons">
-              <div className="account__watch-circle">
-                  <i className="fas fa-play" />
-              </div>
-              <div className="account__watch-circle">
-                  <i className="fas fa-times" />
-              </div>
-              </div>
-              </div>
-          </div>
-          
+          {globalState.watchList !== null ? showWatchList() : 'No Media Added!' }
           </div>
           </div>
           <div className="account__menu">
@@ -34,7 +62,7 @@ const Account = (props) => {
                 <li>
                     <a href="/">Account</a>    
                 </li> 
-                <li>
+                <li onClick={signOut}>
                     <a href="/" >Sign Out</a>    
                 </li>    
             </ul>

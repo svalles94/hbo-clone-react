@@ -26,7 +26,7 @@ const CastInfo = (props) => {
       .then(function () {
         // always executed
       });
-  }, [props.mediaId, props.mediaType]);
+  }, [props.updateData]);
   const showCast = () => {
     if(loadingData !== true){
       return credits.cast.map((item, index) => {

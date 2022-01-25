@@ -28,7 +28,7 @@ const MediaRow = (props) => {
       .then(function () {
         // always executed
       });
-  }, []);
+  }, [props.updateData]);
 
   const loopComp = (comp, digit) => {
     let thumbnails = [<Skeleton key={'a'} />,<Skeleton key={'b'} />,<Skeleton key={'c'} />,<Skeleton key={'d'} />,<Skeleton key={'e'} />,<Skeleton key={'f'} />,<Skeleton key={'g'} />,<Skeleton key={'h'} />,<Skeleton key={'i'} />];

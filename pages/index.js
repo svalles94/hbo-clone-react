@@ -13,13 +13,14 @@ import PlaceHolders from "../components/UI/Placeholder/PlaceHolders";
 export default function Home() {
   const globalState = useStateContext();
   const router = useRouter();
-  useEffect(() => {}, []);
+  
   return AuthCheck(
     <MainLayout>
       <FeaturedMedia
+        frontPage="true"
         mediaType="movie"
         type="front"
-        mediaUrl="https://www.youtube.com/embed/-FmWuCgJmxo?mute=1&autoplay=1"
+        mediaUrl="https://www.youtube.com/embed/-FmWuCgJmxo?mute=1&loop=1&playlist=-FmWuCgJmxo&autoplay=1"
         title="Venom 2: let there be carnage"
         location="In theaters and on HBO MAX. Streaming throughout May 23."
         linkUrl="/movie/580489"

@@ -46,7 +46,7 @@ export default function SingleMediaPage(props) {
         .slice(0, 1);
       const chosenVideoKey = videoResults.map((a) => a.key)[0];
       const website = videoResults.map((a) => a.site)[0];
-      console.log("///////////////////");
+
       if (website == "YouTube") {
         return `https://www.youtube.com/embed/${chosenVideoKey}?mute=1&autoplay=1&loop=1&playlist=${chosenVideoKey}`;
       } else {
@@ -56,7 +56,6 @@ export default function SingleMediaPage(props) {
   };
 
   const imageUrl = () => {
-    if (props.hasVideo == false) {
       const posterPath = props.mediaData.poster_path;
       const backDropPath = props.mediaData.backdrop_path;
       if (backDropPath == null) {
@@ -64,9 +63,7 @@ export default function SingleMediaPage(props) {
       } else {
         return `https://image.tmdb.org/t/p/w1280${backDropPath}`;
       }
-    } else {
-      return;
-    }
+   
   };
 
   return AuthCheck(
@@ -82,13 +79,16 @@ export default function SingleMediaPage(props) {
             : props.mediaData.name
         }
         location="In theaters and on HBO MAX. Streaming throughout May 23."
-        linkUrl="/movies/id"
+        linkUrl={`/movie/${props.query.id}`}
+        mediaType={props.query.mediaType}
+        mediaId={props.query.id}
       />
       <LazyLoad
         offset={-400}
         placeholder={<PlaceHolders title="Popular Movies" type="large-v" />}
       >
         <MediaRow
+          updateData={props.query.id}
           title="Similar To This"
           mediaType={props.query.mediaType}
           type="small-v"
@@ -97,7 +97,7 @@ export default function SingleMediaPage(props) {
           }/similar?`}
         />
       </LazyLoad>
-      <CastInfo mediaId={props.query.id} mediaType={props.query.mediaType} />
+      <CastInfo mediaId={props.query.id} mediaType={props.query.mediaType} updateData={props.query.id}/>
     </MainLayout>
   );
 }

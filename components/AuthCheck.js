@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ls from 'local-storage';
 import { useMounted } from './Hooks/useMounted';
+import Login from './UI/Login/Login';
 
 const AuthCheck = (component) => {
 const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -14,7 +15,10 @@ useEffect(() => {
     // if(users.length >= 1) {
     //     router.push('/login');
     // }
-    if(activeUID === null && users.length < 1) {
+    if(users.length > 0 && activeUID == 'null'){
+        router.push('/login');
+    }
+    if(users.length < 1) {
         router.push('/create');
     }
 }, [])
@@ -27,6 +31,10 @@ if(users.length >= 1 && activeUID !== null ) {
                 </div>
             </div>
         </div>
+    )
+} else if(users.length >= 1 && activeUID == null) {
+    return(
+        <Login />
     )
 } else {
     return(
