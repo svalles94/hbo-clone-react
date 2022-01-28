@@ -55,4 +55,8 @@
             transition-delay: 0.15s * $i;
         }
     }
+    @media only screen and (max-width: 600px) {
+        height: -webkit-fill-available;
+     }
 }
+

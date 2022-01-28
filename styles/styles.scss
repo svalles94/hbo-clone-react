@@ -14,8 +14,14 @@
 h1 {
     font-size: 3rem;
 }
-html , body {
+html {
+    @media only screen and (max-width: 600px) {
+        width: fit-content;
+    }
+}
+body {
     background: black;
+    
 }
 
 .hide-comp {
