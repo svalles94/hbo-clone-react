@@ -14,16 +14,17 @@
 h1 {
     font-size: 3rem;
 }
-html {
-    @media only screen and (max-width: 600px) {
-        width: fit-content;
-    }
-}
-body {
+
+
+html, body {
     background: black;
     
 }
 
 .hide-comp {
     display: none;
+}
+
+.content-container {
+    width: fit-content;
 }
