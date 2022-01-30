@@ -42,11 +42,7 @@ const SideNav = (props) => {
 
       </ul>
       <div className="side-nav__divider" />
-      <ul className="side-nav__main">
-        <li>
-          <a href="">wow</a>
-        </li>
-        </ul>
+      
     </div>
   );
 };

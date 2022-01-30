@@ -44,6 +44,12 @@
         color: white;
         margin-bottom: 1rem;
         cursor: pointer;
+        @media (max-width: 1000px) {
+            font-size: 5rem;
+        }
+        @media (max-width: 600px) {
+            font-size: 3rem;
+        }
     }
     &__playing {
         font-size: .9rem;
